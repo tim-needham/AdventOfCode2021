@@ -23,10 +23,11 @@ let main argv =
                             | 'T' | 't' -> true, Int32.TryParse(i.Substring(1));
                             | _ -> false, Int32.TryParse(i);
 
-                match d with
-                    | true, n when n > 0 && n < 26 -> problems.[n-1] (String.Format(@"day{0}.txt", n), t);
-                    | true, _ -> ignore true;
-                    | false, _ -> cont <- false;
+                match d, t with
+                    | (true, n), false when n > 0 && n < 26 -> problems.[n-1] (String.Format(@"day{0}.txt", n), t);
+                    | (true, n), true when n > 0 && n < 26 -> problems.[n-1] (String.Format(@"test{0}.txt", n), t);
+                    | (true, _), _  -> ignore true;
+                    | (false, _), _ -> cont <- false;
 
         printfn "";
 
