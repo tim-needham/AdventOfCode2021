@@ -10,7 +10,7 @@ let run (file : string, testMode : bool) =
     w.Start();
 
     let depths =    File.ReadAllLines(file)
-                    |> Seq.map (Int32.Parse)
+                    |> Seq.map (Int32.Parse);
 
     depths
     |> Seq.pairwise
