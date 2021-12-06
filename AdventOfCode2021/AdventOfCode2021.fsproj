@@ -53,6 +53,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="Utils\Memo.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
     <Compile Include="Day1.fs" />
