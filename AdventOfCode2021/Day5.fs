@@ -30,11 +30,15 @@ let expand (diagonals : bool) (vent : Vent) : Point list =
     let ix = if dx >= 0 then 1 else -1;
     let iy = if dy >= 0 then 1 else -1;
 
-    if vent.Origin.X = vent.Destination.X && vent.Origin.Y <> vent.Destination.Y then
+    if vent.Origin.X = vent.Destination.X && vent.Origin.Y = vent.Destination.Y then
+        [
+            { X = vent.Origin.X; Y = vent.Origin.Y }
+        ];
+    else if vent.Origin.X = vent.Destination.X then
         [
             for i in vent.Origin.Y..iy..vent.Destination.Y -> { X = vent.Origin.X; Y = i }
         ];
-    else if vent.Origin.Y = vent.Destination.Y && vent.Origin.X <> vent.Origin.Y then
+    else if vent.Origin.Y = vent.Destination.Y then
         [
             for i in vent.Origin.X..ix..vent.Destination.X -> { X = i; Y = vent.Origin.Y }
         ];
