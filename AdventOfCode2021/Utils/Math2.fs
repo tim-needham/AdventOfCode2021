@@ -1,5 +1,7 @@
 ﻿module Math2
 
+open Memo;
+
 // convert a hecidecimal character to its binary representation
 let hexToBin (input : char) : int list =
     match input with
@@ -37,4 +39,12 @@ let binToLong (input : int list) : int64 =
         | [] -> total;
         | x::xs -> b2d (total + (mul * int64 x)) (mul * 2L) xs;
 
-    input |> List.rev |> b2d 0L 1L;
+    input |> List.rev |> b2d 0L 1L
+
+// calculate the nth triangular number
+let rec triangular (n : int) : int =
+    if n < 1 then
+        0;
+    else
+        n + triangularMemo (n - 1);
+and triangularMemo = memoize triangular;

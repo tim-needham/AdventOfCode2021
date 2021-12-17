@@ -1,6 +1,6 @@
 module Day7
 
-open Memo;
+open Math2;
 open System;
 open System.Diagnostics;
 open System.IO;
@@ -9,14 +9,6 @@ let parse (input : string) : int list =
     input.Split([| "," |], StringSplitOptions.RemoveEmptyEntries)
     |> Seq.toList
     |> List.map Int32.Parse;
-
-// compute triangular numbers, I knew I'd need memoization again...
-let rec triangular (n : int) : int =
-    if n < 1 then
-        0;
-    else
-        n + triangularMemo (n - 1);
-and triangularMemo = memoize triangular;
 
 let fuelCostConstant (position : int) (crabs : int list) : int =
     crabs
