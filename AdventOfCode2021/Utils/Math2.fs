@@ -1,7 +1,5 @@
 ﻿module Math2
 
-open Memo;
-
 // convert a hecidecimal character to its binary representation
 let hexToBin (input : char) : int list =
     match input with
@@ -43,8 +41,4 @@ let binToLong (input : int list) : int64 =
 
 // calculate the nth triangular number
 let rec triangular (n : int) : int =
-    if n < 1 then
-        0;
-    else
-        n + triangularMemo (n - 1);
-and triangularMemo = memoize triangular;
+    n * (n + 1) / 2;

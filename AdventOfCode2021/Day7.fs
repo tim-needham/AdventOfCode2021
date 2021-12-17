@@ -16,7 +16,7 @@ let fuelCostConstant (position : int) (crabs : int list) : int =
 
 let fuelCostTriangular (position : int) (crabs : int list) : int =
     crabs
-    |> List.sumBy (fun x -> Math.Abs(position - x) |> triangularMemo);
+    |> List.sumBy (fun x -> Math.Abs(position - x) |> triangular);
 
 // moving across the position space in order, results will decrease then increase so stop when we start increasing
 let rec bestFuel (fuelCost : int option) (crabs : int list) (cost : int -> int list -> int) (positions : int list) : int =
