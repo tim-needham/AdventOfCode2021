@@ -68,6 +68,7 @@ let parsePackets (input : int list) : Packet list =
                                         { Version = v; Type = LessThan ps }, remainder;
                         | v, 7, r ->    let ps, remainder = parseSubPackets r;
                                         { Version = v; Type = EqualTo ps }, remainder;
+                        | _, _, _ -> failwith "Parse error in packet!";
                         |> (fun (p, r) -> parsePacket (packets @ [p]) l r);
     and parseSubPackets (input : int list) : Packet list * int list =
         match List.splitAt 1 input with
@@ -79,6 +80,7 @@ let parsePackets (input : int list) : Packet list =
         | [1], tail ->  tail
                         |> List.skip 11
                         |> parsePacket [] (tail |> List.take 11 |> binToDec |> Some);
+        | _, _ -> failwith "Parse error in sub-packets!";
 
     parsePacket [] None input
     |> fst;
@@ -101,3 +103,4 @@ let rec evalPacket (packet : Packet) : int64 =
     | GreaterThan [p; q] -> if evalPacket p > evalPacket q then 1L else 0L;
     | LessThan [p; q] -> if evalPacket p < evalPacket q then 1L else 0L;
     | EqualTo [p; q] -> if evalPacket p = evalPacket q then 1L else 0L;
+    | _ -> failwith "Invalid packet format!";
